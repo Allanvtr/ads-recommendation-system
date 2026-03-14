@@ -16,7 +16,8 @@ Cada registro de usuário possui os seguintes atributos:
 - **ad_id** — identificador único do anúncio
 - **state_target** — estado alvo da campanha publicitária
 - **city_target** — cidade alvo da campanha
-- **age_target** — faixa etária alvo do anúncio
+- **age_minimum_target** — idade mínima alvo do anúncio
+- **age_maximum_target** — idade máxima alvo do anúncio
 - **gender_target** — gênero alvo da campanha
 - **categories** — categorias associadas ao anúncio
 - **bid** — valor que o anunciante está disposto a pagar por interação ou exibição
@@ -91,40 +92,30 @@ Cada estado possui um conjunto de cidades possíveis para geração dos usuário
 - São Paulo
 - Campinas
 - Santos
-- São Bernardo do Campo
-- São José dos Campos
 
 ### Minas Gerais (MG)
 
 - Belo Horizonte
 - Uberlândia
 - Contagem
-- Juiz de Fora
-- Betim
 
 ### Rio de Janeiro (RJ)
 
 - Rio de Janeiro
 - São Gonçalo
 - Duque de Caxias
-- Nova Iguaçu
-- Niterói
 
 ### Bahia (BA)
 
 - Salvador
 - Feira de Santana
 - Vitória da Conquista
-- Camaçari
-- Juazeiro
 
 ### Paraná (PR)
 
 - Curitiba
 - Londrina
 - Maringá
-- Ponta Grossa
-- Cascavel
 
 # Distribuição dos Dados
 
