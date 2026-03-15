@@ -7,15 +7,14 @@ Cada registro de usuário possui os seguintes atributos:
 - **user_id** — identificador único do usuário
 - **age** — idade do usuário
 - **gender** — gênero do usuário
-- **state** — estado onde o usuário está localizado
-- **city** — cidade do usuário
+- **lon e lat** — longitude e latitude do usuário
 - **preferences** — conjunto de categorias de interesse do usuário, juntamente com seus respectivos pesos de preferência
 
 ## Anúncios
 
 - **ad_id** — identificador único do anúncio
-- **state_target** — estado alvo da campanha publicitária
-- **city_target** — cidade alvo da campanha
+- **lon_target e lat_target** — longitude e latitude do anúncio (evento)
+- **location_sensitive** — indica se a distância importa
 - **age_target** — faixa etária alvo do anúncio
 - **gender_target** — gênero alvo da campanha
 - **categories** — categorias associadas ao anúncio
@@ -23,6 +22,7 @@ Cada registro de usuário possui os seguintes atributos:
 - **budget** — orçamento total disponível para o anúncio
 - **trust_score** — pontuação de confiabilidade do anunciante na plataforma
 - **estimated_conversion_rate** — taxa estimada de conversão do anúncio
+- **click_probability** — probabilidade de clique
 
 # Domínios dos Atributos
 
@@ -69,6 +69,7 @@ O atributo **gender** pode assumir os seguintes valores:
 
 - **M** — masculino
 - **F** — feminino
+- **Any** — sem preferência (apenas para ads)
 
 Esse atributo é utilizado tanto nos **usuários** quanto na **segmentação de anúncios**.
 
@@ -81,50 +82,6 @@ Os estados utilizados no dataset são:
 - RJ — Rio de Janeiro
 - BA — Bahia
 - PR — Paraná
-
-## Cidades por Estado
-
-Cada estado possui um conjunto de cidades possíveis para geração dos usuários.
-
-### São Paulo (SP)
-
-- São Paulo
-- Campinas
-- Santos
-- São Bernardo do Campo
-- São José dos Campos
-
-### Minas Gerais (MG)
-
-- Belo Horizonte
-- Uberlândia
-- Contagem
-- Juiz de Fora
-- Betim
-
-### Rio de Janeiro (RJ)
-
-- Rio de Janeiro
-- São Gonçalo
-- Duque de Caxias
-- Nova Iguaçu
-- Niterói
-
-### Bahia (BA)
-
-- Salvador
-- Feira de Santana
-- Vitória da Conquista
-- Camaçari
-- Juazeiro
-
-### Paraná (PR)
-
-- Curitiba
-- Londrina
-- Maringá
-- Ponta Grossa
-- Cascavel
 
 # Distribuição dos Dados
 
@@ -180,3 +137,22 @@ Onde:
 - **Fator de nicho** depende da quantidade de categorias alvo do anúncio:
   - se o anúncio tiver **até 2 categorias**, o fator é **1,2**
   - caso contrário, o fator é **0,8**
+
+### Probabilidade de Clique
+
+A **probabilidade de clique estimada** é calculada utilizando a seguinte fórmula:
+
+```
+probabilidade de clique = base × fator de nicho × confiança
+```
+
+Onde:
+
+- **Base** representa a taxa média de cliques (_CTR base_), gerada aleatoriamente entre **1% e 5%**.
+- **Fator de nicho** depende da quantidade de categorias alvo do anúncio:
+  - se o anúncio tiver **até 2 categorias**, o fator é **1,2**
+  - caso contrário, o fator é **0,8**
+
+- **Confiança** corresponde ao **trust score** do anunciante, um valor entre **0 e 1** que representa a confiabilidade do anúncio.
+
+Essa fórmula simula o comportamento de anúncios mais **segmentados e confiáveis**, que tendem a apresentar uma **maior probabilidade de clique**.
